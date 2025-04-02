@@ -36,16 +36,6 @@ export function SiteHeader() {
   const pathname = usePathname()
   const router = useRouter()
 
-  // Initialize with default values
-  const [cartCount, setCartCount] = useState(0)
-  const { cartCount: contextCartCount, toggleCart: contextToggleCart } = useCart()
-  const [toggleCart, setToggleCart] = useState(() => () => {})
-
-  useEffect(() => {
-    setCartCount(contextCartCount)
-    setToggleCart(() => contextToggleCart)
-  }, [contextCartCount, contextToggleCart])
-
   // Only access the cart context after component has mounted
   useEffect(() => {
     setIsMounted(true)

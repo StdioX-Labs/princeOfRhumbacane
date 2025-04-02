@@ -14,34 +14,60 @@ type CarouselImage = {
   alt?: string
 }
 
-// Helper function to extract and format filename from path
+// Update the getFilenameFromPath function to better handle various naming formats
 function getFilenameFromPath(path: string): string {
-  // Extract filename from path
-  const filename = path.split("/").pop() || ""
-
-  // For placeholder images, extract the text parameter if it exists
-  if (filename.includes("placeholder.svg")) {
-    const textMatch = path.match(/text=([^&]+)/)
-    if (textMatch && textMatch[1]) {
-      // URL decode the text parameter
-      return decodeURIComponent(textMatch[1])
-    }
+  // Check if path is undefined or null
+  if (!path) {
+    return "Image"
   }
 
-  // Remove file extension
-  const nameWithoutExtension = filename.split(".")[0]
+  try {
+    // Extract filename from path
+    const filename = path.split("/").pop() || ""
 
-  // Replace hyphens and underscores with spaces
-  const nameWithSpaces = nameWithoutExtension.replace(/[-_]/g, " ")
+    // For placeholder images, extract the text parameter if it exists
+    if (filename.includes("placeholder.svg")) {
+      const textMatch = path.match(/text=([^&]+)/)
+      if (textMatch && textMatch[1]) {
+        // URL decode the text parameter
+        return decodeURIComponent(textMatch[1]).replace(/\+/g, " ")
+      }
+    }
 
-  // Capitalize each word
-  return nameWithSpaces
-    .split(" ")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ")
+    // Remove file extension
+    const nameWithoutExtension = filename.split(".")[0] || ""
+
+    // Replace hyphens and underscores with spaces
+    const nameWithSpaces = nameWithoutExtension.replace(/[-_]/g, " ")
+
+    // Add spaces between camelCase words
+    const withCamelCaseSpaces = nameWithSpaces.replace(/([a-z])([A-Z])/g, "$1 $2")
+
+    // Add spaces between numbers and letters
+    const withNumberSpaces = withCamelCaseSpaces.replace(/([a-zA-Z])(\d)/g, "$1 $2").replace(/(\d)([a-zA-Z])/g, "$1 $2")
+
+    // Capitalize each word
+    return withNumberSpaces
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(" ")
+      .trim()
+  } catch (error) {
+    console.error("Error processing image filename:", error)
+    return "Image" // Fallback caption
+  }
 }
 
-export function PhotoCarousel({ images = [] }: { images?: CarouselImage[] }) {
+// Update the PhotoCarousel component to accept title and description props
+export function PhotoCarousel({
+  images = [],
+  title = "Performance Highlights",
+  description = "Capturing the essence of artistic expression through visual moments.",
+}: {
+  images?: CarouselImage[]
+  title?: string
+  description?: string
+}) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
   const carouselRef = useRef<HTMLDivElement>(null)
@@ -108,12 +134,10 @@ export function PhotoCarousel({ images = [] }: { images?: CarouselImage[] }) {
       <div className="container px-4 md:px-6">
         <div className="mx-auto flex max-w-[980px] flex-col items-center gap-6 text-center">
           <h2 className="text-3xl font-bold leading-tight tracking-tighter md:text-4xl lg:text-5xl text-white">
-            Performance Highlights
+            {title}
           </h2>
           <div className="w-20 h-1 bg-primary rounded-full" />
-          <p className="max-w-[750px] text-lg text-white/80 sm:text-xl">
-            Capturing the essence of artistic expression through visual moments.
-          </p>
+          <p className="max-w-[750px] text-lg text-white/80 sm:text-xl">{description}</p>
         </div>
 
         <div
@@ -128,8 +152,8 @@ export function PhotoCarousel({ images = [] }: { images?: CarouselImage[] }) {
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
             {images.map((image, index) => {
-              // Always use the filename as the caption, ignoring any provided alt text
-              const caption = getFilenameFromPath(image.src)
+              // Use the alt text if provided, otherwise extract from filename
+              const caption = image.alt || getFilenameFromPath(image.src)
 
               return (
                 <div key={image.id} className="min-w-full" aria-hidden={currentIndex !== index}>
