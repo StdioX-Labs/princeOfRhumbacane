@@ -7,6 +7,8 @@ import { CartProvider } from "@/context/cart-context"
 import { CartSidebar } from "@/components/cart-sidebar"
 import { ArtisticCursor } from "@/components/artistic-cursor"
 import { CoffeeSupport } from "@/components/coffee-support"
+import { SiteHeader } from "@/components/site-header"
+import { SiteFooter } from "@/components/site-footer"
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -29,7 +31,9 @@ export default function RootLayout({
       <body className={`${playfair.variable} min-h-screen font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <CartProvider>
-            {children}
+            <SiteHeader />
+            <main>{children}</main>
+            <SiteFooter />
             <CartSidebar />
             <Toaster />
             <ArtisticCursor />

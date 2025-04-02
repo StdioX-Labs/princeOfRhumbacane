@@ -29,6 +29,24 @@ function addSpacesBetweenLettersAndNumbers(text: string): string {
   return text.replace(/([a-zA-Z])(\d)/g, "$1 $2").replace(/(\d)([a-zA-Z])/g, "$1 $2")
 }
 
+// Fallback gallery images
+function getFallbackGalleryImages(): GalleryImage[] {
+  return [
+    {
+      id: 1,
+      src: "/placeholder.svg?height=400&width=600&text=Fallback+Image+1",
+      alt: "Fallback Image 1",
+      category: "Fallback",
+    },
+    {
+      id: 2,
+      src: "/placeholder.svg?height=400&width=600&text=Fallback+Image+2",
+      alt: "Fallback Image 2",
+      category: "Fallback",
+    },
+  ]
+}
+
 // Function to scan the gallery directory and generate image list
 export async function getGalleryImages(): Promise<GalleryImage[]> {
   try {
@@ -83,53 +101,92 @@ export async function getGalleryImages(): Promise<GalleryImage[]> {
   }
 }
 
-// Fallback gallery images in case the directory scan fails
-function getFallbackGalleryImages(): GalleryImage[] {
+// Update the getCarouselImages function to better handle various naming formats
+export async function getCarouselImages(): Promise<CarouselImage[]> {
+  try {
+    const carouselDir = path.join(process.cwd(), "public", "images", "carousel")
+
+    // Check if directory exists
+    if (!fs.existsSync(carouselDir)) {
+      console.log("Carousel directory does not exist, creating it...")
+      fs.mkdirSync(carouselDir, { recursive: true })
+      return getFallbackCarouselImages() // Return fallback images if directory was just created
+    }
+
+    // Read all files in the directory
+    const files = fs.readdirSync(carouselDir)
+
+    // Filter for image files only
+    const imageFiles = files.filter((file) => {
+      const ext = path.extname(file).toLowerCase()
+      return [".jpg", ".jpeg", ".png", ".webp", ".gif"].includes(ext)
+    })
+
+    if (imageFiles.length === 0) {
+      return getFallbackCarouselImages() // Return fallback images if no images found
+    }
+
+    // Process each image file
+    return imageFiles.map((file, index) => {
+      // Get filename without extension
+      const nameWithoutExt = path.basename(file, path.extname(file))
+
+      // Format the filename for display
+      // Replace hyphens and underscores with spaces
+      let caption = nameWithoutExt.replace(/[-_]/g, " ")
+
+      // Add spaces between camelCase words
+      caption = caption.replace(/([a-z])([A-Z])/g, "$1 $2")
+
+      // Add spaces between numbers and letters
+      caption = caption.replace(/([a-zA-Z])(\d)/g, "$1 $2").replace(/(\d)([a-zA-Z])/g, "$1 $2")
+
+      // Capitalize each word
+      caption = caption
+        .split(" ")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+        .join(" ")
+        .trim()
+
+      return {
+        id: index + 1,
+        src: `/images/carousel/${file}`,
+        alt: caption,
+      }
+    })
+  } catch (error) {
+    console.error("Error reading carousel directory:", error)
+    return getFallbackCarouselImages() // Return fallback images on error
+  }
+}
+
+// Update the fallback carousel images to demonstrate different naming formats
+function getFallbackCarouselImages(): CarouselImage[] {
   return [
     {
       id: 1,
-      src: "/placeholder.svg?height=600&width=800&text=live_Performance",
-      alt: "Performance at Summer Festival",
-      category: "Live",
+      src: "/placeholder.svg?height=800&width=1600&text=StagePerformance",
+      alt: "Stage Performance",
     },
     {
       id: 2,
-      src: "/placeholder.svg?height=800&width=600&text=studio_Recording",
-      alt: "Studio recording session",
-      category: "Studio",
+      src: "/placeholder.svg?height=800&width=1600&text=Studio+Session",
+      alt: "Studio Session",
     },
     {
       id: 3,
-      src: "/placeholder.svg?height=600&width=800&text=backstage_Preparation",
-      alt: "Backstage preparation",
-      category: "Backstage",
+      src: "/placeholder.svg?height=800&width=1600&text=Live-Show2024",
+      alt: "Live Show 2024",
     },
     {
       id: 4,
-      src: "/placeholder.svg?height=800&width=800&text=photoshoot_AlbumCover",
-      alt: "Album cover photoshoot",
-      category: "Photoshoot",
-    },
-  ]
-}
-
-export async function getCarouselImages(): Promise<CarouselImage[]> {
-  // Simulate fetching carousel images
-  return [
-    {
-      id: 1,
-      src: "/placeholder.svg?height=800&width=1600&text=Performance Highlights",
-      alt: "Live performance at Madison Square Garden",
+      src: "/placeholder.svg?height=800&width=1600&text=Acoustic_Night",
+      alt: "Acoustic Night",
     },
     {
-      id: 2,
-      src: "/placeholder.svg?height=800&width=1600&text=Studio Session",
-      alt: "Recording session for the new album",
-    },
-    {
-      id: 3,
-      src: "/placeholder.svg?height=800&width=1600&text=World Tour",
-      alt: "World tour opening night",
+      id: 5,
+      src: "/placeholder.svg?height=800&width=1600&text=FestivalAppearance",
+      alt: "Festival Appearance",
     },
   ]
 }
