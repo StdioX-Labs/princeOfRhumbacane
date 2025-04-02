@@ -1,5 +1,8 @@
 "use server"
 
+import fs from "fs"
+import path from "path"
+
 // Define the image types
 type GalleryImage = {
   id: number
@@ -14,47 +17,98 @@ type CarouselImage = {
   alt?: string
 }
 
-// Server actions to fetch images for different sections
-// In a real implementation, these would fetch from a database or CMS
+// Helper function to format camelCase to Title Case with spaces
+function formatCamelCase(text: string): string {
+  // Add space before capital letters and capitalize the first letter
+  const withSpaces = text.replace(/([A-Z])/g, " $1").trim()
+  return withSpaces.charAt(0).toUpperCase() + withSpaces.slice(1)
+}
 
+// Helper function to add spaces between letters and numbers
+function addSpacesBetweenLettersAndNumbers(text: string): string {
+  return text.replace(/([a-zA-Z])(\d)/g, "$1 $2").replace(/(\d)([a-zA-Z])/g, "$1 $2")
+}
+
+// Function to scan the gallery directory and generate image list
 export async function getGalleryImages(): Promise<GalleryImage[]> {
-  // Simulate fetching gallery images
+  try {
+    const galleryDir = path.join(process.cwd(), "public", "images", "gallery")
+
+    // Check if directory exists
+    if (!fs.existsSync(galleryDir)) {
+      console.log("Gallery directory does not exist, creating it...")
+      fs.mkdirSync(galleryDir, { recursive: true })
+      return getFallbackGalleryImages() // Return fallback images if directory was just created
+    }
+
+    // Read all files in the directory
+    const files = fs.readdirSync(galleryDir)
+
+    // Filter for image files only
+    const imageFiles = files.filter((file) => {
+      const ext = path.extname(file).toLowerCase()
+      return [".jpg", ".jpeg", ".png", ".webp", ".gif"].includes(ext)
+    })
+
+    if (imageFiles.length === 0) {
+      return getFallbackGalleryImages() // Return fallback images if no images found
+    }
+
+    // Process each image file
+    return imageFiles.map((file, index) => {
+      // Get filename without extension
+      const nameWithoutExt = path.basename(file, path.extname(file))
+
+      // Split by underscore to get category and description
+      const parts = nameWithoutExt.split("_")
+      const category = parts[0] ? formatCamelCase(parts[0]) : "Uncategorized"
+
+      // Get description part (everything after the first underscore)
+      let description = parts.slice(1).join("_")
+
+      // Format the description
+      description = formatCamelCase(description)
+      description = addSpacesBetweenLettersAndNumbers(description)
+
+      return {
+        id: index + 1,
+        src: `/images/gallery/${file}`,
+        alt: description,
+        category: category,
+      }
+    })
+  } catch (error) {
+    console.error("Error reading gallery directory:", error)
+    return getFallbackGalleryImages() // Return fallback images on error
+  }
+}
+
+// Fallback gallery images in case the directory scan fails
+function getFallbackGalleryImages(): GalleryImage[] {
   return [
     {
       id: 1,
       src: "/placeholder.svg?height=600&width=800&text=live_Performance",
       alt: "Performance at Summer Festival",
-      category: "live",
+      category: "Live",
     },
     {
       id: 2,
       src: "/placeholder.svg?height=800&width=600&text=studio_Recording",
       alt: "Studio recording session",
-      category: "studio",
+      category: "Studio",
     },
     {
       id: 3,
       src: "/placeholder.svg?height=600&width=800&text=backstage_Preparation",
       alt: "Backstage preparation",
-      category: "backstage",
+      category: "Backstage",
     },
     {
       id: 4,
       src: "/placeholder.svg?height=800&width=800&text=photoshoot_AlbumCover",
       alt: "Album cover photoshoot",
-      category: "photoshoot",
-    },
-    {
-      id: 5,
-      src: "/placeholder.svg?height=600&width=800&text=live_Orchestra",
-      alt: "Performing with orchestra",
-      category: "live",
-    },
-    {
-      id: 6,
-      src: "/placeholder.svg?height=800&width=600&text=press_Interview",
-      alt: "Interview session",
-      category: "press",
+      category: "Photoshoot",
     },
   ]
 }
