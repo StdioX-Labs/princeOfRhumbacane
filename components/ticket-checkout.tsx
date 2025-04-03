@@ -30,17 +30,24 @@ type Show = {
   description: string
   ticketLink: string
   isSoldOut: boolean
-  ticketTypes: TicketType[]
+  ticketTypes: {
+    id: number
+    eventId: number
+    name: string
+    price: number
+    description: string
+    available?: boolean
+  }[]
 }
 
 // Ticket type definition
-type TicketType = {
-  id: number
-  eventId: number
-  name: string
-  price: number
-  description: string
-}
+// type TicketType = {
+//   id: number
+//   eventId: number
+//   name: string
+//   price: number
+//   description: string
+// }
 
 // Props type definition
 type TicketCheckoutProps = {
@@ -48,12 +55,17 @@ type TicketCheckoutProps = {
   onClose: () => void
 }
 
+// Update the TicketCheckout component to handle individual sold-out tickets
 export function TicketCheckout({ show, onClose }: TicketCheckoutProps) {
   const [activeStep, setActiveStep] = useState("details")
   const [isProcessing, setIsProcessing] = useState(false)
   const [isComplete, setIsComplete] = useState(false)
   const [ticketQuantity, setTicketQuantity] = useState(1)
-  const [selectedTicketType, setSelectedTicketType] = useState<number>(show.ticketTypes[0]?.id || 0)
+  // Find the first available ticket type to set as default
+  const firstAvailableTicket = show.ticketTypes.find((ticket) => ticket.available !== false)
+  const [selectedTicketType, setSelectedTicketType] = useState<number>(
+    firstAvailableTicket ? firstAvailableTicket.id : show.ticketTypes[0]?.id || 0,
+  )
   const [paymentMethod, setPaymentMethod] = useState("mpesa")
   const [termsAgreed, setTermsAgreed] = useState(false)
   const [paymentTermsAgreed, setPaymentTermsAgreed] = useState(false)
@@ -248,12 +260,29 @@ export function TicketCheckout({ show, onClose }: TicketCheckoutProps) {
                         >
                           {show.ticketTypes.map((ticket) => (
                             <div key={ticket.id} className="flex items-start space-x-3">
-                              <RadioGroupItem value={ticket.id.toString()} id={ticket.id.toString()} className="mt-1" />
-                              <div className="grid gap-1.5">
-                                <Label htmlFor={ticket.id.toString()} className="font-medium">
-                                  {ticket.name} - KES {Math.round(ticket.price).toLocaleString()}
-                                </Label>
-                                <p className="text-sm text-muted-foreground">{ticket.description}</p>
+                              <RadioGroupItem
+                                value={ticket.id.toString()}
+                                id={ticket.id.toString()}
+                                className="mt-1"
+                                disabled={ticket.available === false}
+                              />
+                              <div className="grid gap-1.5 flex-1">
+                                <div className="flex items-center justify-between">
+                                  <Label
+                                    htmlFor={ticket.id.toString()}
+                                    className={`font-medium ${ticket.available === false ? "text-muted-foreground" : ""}`}
+                                  >
+                                    {ticket.name} - KES {Math.round(ticket.price).toLocaleString()}
+                                  </Label>
+                                  {ticket.available === false && (
+                                    <span className="text-xs text-destructive font-medium">Sold Out</span>
+                                  )}
+                                </div>
+                                <p
+                                  className={`text-sm ${ticket.available === false ? "text-muted-foreground/70" : "text-muted-foreground"}`}
+                                >
+                                  {ticket.description}
+                                </p>
                               </div>
                             </div>
                           ))}
