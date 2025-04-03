@@ -191,6 +191,81 @@ function getFallbackCarouselImages(): CarouselImage[] {
   ]
 }
 
+export async function getHeroImages(): Promise<{ src: string; alt: string }[]> {
+  try {
+    const heroDir = path.join(process.cwd(), "public", "images", "hero")
+
+    // Check if directory exists
+    if (!fs.existsSync(heroDir)) {
+      console.log("Hero directory does not exist, creating it...")
+      fs.mkdirSync(heroDir, { recursive: true })
+      return getFallbackHeroImages() // Return fallback images if directory was just created
+    }
+
+    // Read all files in the directory
+    const files = fs.readdirSync(heroDir)
+
+    // Filter for image files only
+    const imageFiles = files.filter((file) => {
+      const ext = path.extname(file).toLowerCase()
+      return [".jpg", ".jpeg", ".png", ".webp", ".gif"].includes(ext)
+    })
+
+    if (imageFiles.length === 0) {
+      return getFallbackHeroImages() // Return fallback images if no images found
+    }
+
+    // Process each image file
+    return imageFiles.map((file, index) => {
+      // Get filename without extension
+      const nameWithoutExt = path.basename(file, path.extname(file))
+
+      // Format the filename for display
+      // Replace hyphens and underscores with spaces
+      let caption = nameWithoutExt.replace(/[-_]/g, " ")
+
+      // Add spaces between camelCase words
+      caption = caption.replace(/([a-z])([A-Z])/g, "$1 $2")
+
+      // Add spaces between numbers and letters
+      caption = caption.replace(/([a-zA-Z])(\d)/g, "$1 $2").replace(/(\d)([a-zA-Z])/g, "$1 $2")
+
+      // Capitalize each word
+      caption = caption
+        .split(" ")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+        .join(" ")
+        .trim()
+
+      return {
+        src: `/images/hero/${file}`,
+        alt: caption,
+      }
+    })
+  } catch (error) {
+    console.error("Error reading hero directory:", error)
+    return getFallbackHeroImages() // Return fallback images on error
+  }
+}
+
+// Add this function to your existing actions.ts file
+function getFallbackHeroImages(): { src: string; alt: string }[] {
+  return [
+    {
+      src: "/placeholder.svg?height=1080&width=1920&text=YABA+Performance",
+      alt: "YABA Performance",
+    },
+    {
+      src: "/placeholder.svg?height=1080&width=1920&text=YABA+Studio",
+      alt: "YABA in Studio",
+    },
+    {
+      src: "/placeholder.svg?height=1080&width=1920&text=YABA+Concert",
+      alt: "YABA Concert",
+    },
+  ]
+}
+
 export async function getShowImages(): Promise<string[]> {
   // Simulate fetching show images
   return [
@@ -254,5 +329,30 @@ export async function getMerchandiseImages(): Promise<string[]> {
     "/placeholder.svg?height=500&width=500&text=Clothing_Beanie",
     "/placeholder.svg?height=500&width=500&text=Accessories_Photo",
   ]
+}
+
+// Add this function to your existing actions.ts file
+export async function getLogoImage(): Promise<string> {
+  try {
+    const logoPath = path.join(process.cwd(), "public", "images", "logo", "yaba_logo.png")
+
+    // Check if logo file exists
+    if (fs.existsSync(logoPath)) {
+      return "/images/logo/yaba_logo.png"
+    }
+
+    // Check if logo directory exists, if not create it
+    const logoDir = path.join(process.cwd(), "public", "images", "logo")
+    if (!fs.existsSync(logoDir)) {
+      console.log("Logo directory does not exist, creating it...")
+      fs.mkdirSync(logoDir, { recursive: true })
+    }
+
+    // Return placeholder if no logo found
+    return "/placeholder.svg?height=200&width=400&text=YABA+LOGO"
+  } catch (error) {
+    console.error("Error checking for logo:", error)
+    return "/placeholder.svg?height=200&width=400&text=YABA+LOGO"
+  }
 }
 

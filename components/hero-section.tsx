@@ -8,9 +8,43 @@ import { motion } from "framer-motion"
 
 import { Button } from "@/components/ui/button"
 
-export function HeroSection() {
+type HeroImage = {
+  src: string
+  alt: string
+}
+
+export function HeroSection({
+  images = [],
+  logoSrc = "",
+}: {
+  images?: HeroImage[]
+  logoSrc?: string
+}) {
   const [mounted, setMounted] = useState(false)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const imageRef = useRef<HTMLDivElement>(null)
+
+  // Default images if none are provided
+  const defaultImages: HeroImage[] = [
+    {
+      src: "/placeholder.svg?height=1080&width=1920&text=YABA+Performance",
+      alt: "YABA performance",
+    },
+    {
+      src: "/placeholder.svg?height=1080&width=1920&text=YABA+Studio",
+      alt: "YABA in studio",
+    },
+    {
+      src: "/placeholder.svg?height=1080&width=1920&text=YABA+Concert",
+      alt: "YABA concert",
+    },
+  ]
+
+  // Use provided images or fall back to defaults
+  const heroImages = images.length > 0 ? images : defaultImages
+
+  // Default logo if none is provided
+  const logo = logoSrc || "/placeholder.svg?height=200&width=400&text=YABA+LOGO"
 
   useEffect(() => {
     setMounted(true)
@@ -31,9 +65,18 @@ export function HeroSection() {
       imageRef.current.style.transform = `translate(${moveX * 15}px, ${moveY * 15}px)`
     }
 
+    // Image rotation interval
+    const imageInterval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length)
+    }, 5000) // Change image every 5 seconds
+
     window.addEventListener("mousemove", handleMouseMove)
-    return () => window.removeEventListener("mousemove", handleMouseMove)
-  }, [])
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove)
+      clearInterval(imageInterval)
+    }
+  }, [heroImages.length])
 
   // Function to handle smooth scrolling to the shows section
   const scrollToShows = (e: React.MouseEvent) => {
@@ -57,7 +100,10 @@ export function HeroSection() {
         <div className="absolute inset-0 z-10 flex items-center justify-center">
           <div className="container">
             <div className="mx-auto max-w-3xl text-center text-white">
-              <h1 className="font-serif text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">YABA</h1>
+              <div className="relative h-20 w-80 mx-auto">
+                {/* Placeholder for logo during SSR */}
+                <div className="w-full h-full bg-white/10 animate-pulse rounded-md"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -69,15 +115,24 @@ export function HeroSection() {
     <section className="relative h-screen w-full overflow-hidden bg-black">
       {/* Artistic background with subtle movement on mouse position */}
       <div ref={imageRef} className="absolute inset-0 z-0 transition-transform duration-[3s]">
-        <Image
-          src="/placeholder.svg?height=1080&width=1920"
-          alt="YABA"
-          fill
-          quality={100}
-          sizes="100vw"
-          className="object-cover opacity-60"
-          priority
-        />
+        {heroImages.map((image, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              index === currentImageIndex ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <Image
+              src={image.src || "/placeholder.svg"}
+              alt={image.alt}
+              fill
+              quality={90}
+              sizes="100vw"
+              className="object-cover opacity-60"
+              priority={index === 0}
+            />
+          </div>
+        ))}
 
         {/* Simple gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
@@ -101,33 +156,9 @@ export function HeroSection() {
                 transition={{ duration: 1, delay: 0.5 }}
                 className="overflow-hidden"
               >
-                {/* Temporary logo for YABA */}
+                {/* Logo image instead of SVG text */}
                 <div className="relative h-40 w-80 mx-auto sm:h-48 sm:w-96 md:h-56 md:w-[32rem]">
-                  <svg viewBox="0 0 400 150" className="w-full h-full">
-                    <defs>
-                      <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="rgba(255,255,255,0.8)" />
-                        <stop offset="100%" stopColor="rgba(255,255,255,0.4)" />
-                      </linearGradient>
-                    </defs>
-                    <text
-                      x="50%"
-                      y="50%"
-                      dominantBaseline="middle"
-                      textAnchor="middle"
-                      fill="url(#logoGradient)"
-                      stroke="rgba(255,255,255,0.1)"
-                      strokeWidth="1"
-                      style={{
-                        fontFamily: "var(--font-playfair)",
-                        fontSize: "120px",
-                        fontWeight: "200",
-                        letterSpacing: "0.15em",
-                      }}
-                    >
-                      YABA
-                    </text>
-                  </svg>
+                  <Image src={logo || "/placeholder.svg"} alt="YABA Logo" fill className="object-contain" priority />
                 </div>
               </motion.div>
 
