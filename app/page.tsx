@@ -26,9 +26,11 @@ import {
   getSocialImages,
   getTestimonialImages,
   getMerchandiseImages,
+  getHeroImages,
+  getLogoImage, // Add this import
 } from "./actions"
 
-// Make the Home component async to fetch images
+// Update the Home component to fetch the logo
 export default async function Home() {
   // Fetch all images
   const galleryImages = (await getGalleryImages()) || []
@@ -39,11 +41,13 @@ export default async function Home() {
   const socialImages = (await getSocialImages()) || []
   const testimonialImages = (await getTestimonialImages()) || []
   const merchandiseImages = (await getMerchandiseImages()) || []
+  const heroImages = (await getHeroImages()) || []
+  const logoSrc = await getLogoImage() // Add this line
 
   return (
     <>
-      <HeroSection />
-
+      <HeroSection images={heroImages} logoSrc={logoSrc} /> {/* Pass the logo */}
+      {/* Rest of your components remain the same */}
       <section id="shows" className="container py-12 md:py-24 lg:py-32">
         <div className="mx-auto flex max-w-[980px] flex-col items-center gap-4 text-center">
           <h2 className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl lg:leading-[1.1]">
@@ -95,28 +99,21 @@ export default async function Home() {
           </Tabs>
         </div>
       </section>
-
+      {/* ... rest of your code ... */}
       <PhotoCarousel
         images={carouselImages}
         title="Performance Highlights"
         description="Capturing the essence of artistic expression through visual moments."
       />
-
       <AboutSection aboutImages={aboutImages} />
-
       <section id="merchandise">
         <MerchandiseStore merchandiseImages={merchandiseImages} />
       </section>
-
       <GallerySection images={galleryImages} />
-
       <VisualTimeline timelineImages={timelineImages} />
-
       {/* Add the new social media banner section here */}
       <SocialMediaBanner />
-
       <Testimonials testimonialImages={testimonialImages} />
-
       <section className="bg-muted/50 py-12 md:py-24 lg:py-32">
         <div className="container">
           <div className="mx-auto flex max-w-[980px] flex-col items-center gap-4 text-center">
