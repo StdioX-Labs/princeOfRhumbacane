@@ -255,6 +255,7 @@ const mockEvents: Event[] = [
         name: "Premium",
         price: 6500,
         description: "Front row seating with complimentary drinks",
+        
       },
       {
         id: 5,
@@ -262,6 +263,7 @@ const mockEvents: Event[] = [
         name: "Standard",
         price: 4500,
         description: "General admission seating",
+        
       },
     ],
     tags: ["acoustic", "orchestra", "intimate", "night"],
@@ -321,7 +323,7 @@ const mockEvents: Event[] = [
       
       A portion of proceeds from this event will be donated to local charities supporting children in need during the holiday season.
     `,
-    isSoldOut: false,
+    isSoldOut: true,
     isFeatured: true,
     isPublished: true,
     venue: mockVenues[3],
@@ -345,6 +347,7 @@ const mockEvents: Event[] = [
         name: "VIP Experience",
         price: 8000,
         description: "Premium seating, backstage tour, and holiday gift package",
+        
       },
       {
         id: 7,
@@ -352,6 +355,7 @@ const mockEvents: Event[] = [
         name: "Regular",
         price: 3800,
         description: "Standard admission",
+        
       },
       {
         id: 8,
@@ -359,6 +363,7 @@ const mockEvents: Event[] = [
         name: "Family Package",
         price: 12000,
         description: "Admission for 4 people with special family activities",
+
       },
     ],
     tags: ["holiday", "winter", "family", "charity"],
@@ -417,6 +422,7 @@ const mockEvents: Event[] = [
         name: "General Admission",
         price: 3000,
         description: "Standard seating",
+        available: true,
       },
     ],
     tags: ["acoustic", "intimate", "unplugged"],
@@ -486,6 +492,7 @@ const additionalEvents = [
         name: "VIP Pass",
         price: 8500,
         description: "Access to VIP lounge, premium viewing area, and complimentary food and drinks",
+        available: true,
       },
       {
         id: 12,
@@ -500,6 +507,7 @@ const additionalEvents = [
         name: "Family Pack",
         price: 9000,
         description: "Admission for 2 adults and 2 children (under 12)",
+        available: true,
       },
     ],
     tags: ["jazz", "festival", "outdoor", "family-friendly"],
@@ -552,6 +560,7 @@ const additionalEvents = [
         name: "VIP Experience",
         price: 7000,
         description: "Includes signed album, meet & greet, and post-show reception",
+        available: true,
       },
       {
         id: 15,
@@ -559,6 +568,7 @@ const additionalEvents = [
         name: "Standard Ticket",
         price: 4000,
         description: "Includes signed album and performance",
+        available: true,
       },
     ],
     tags: ["album launch", "exclusive", "intimate"],
@@ -590,7 +600,7 @@ const additionalEvents = [
       
       Limited to 50 participants to ensure a personalized experience with plenty of interaction.
     `,
-    isSoldOut: false,
+    isSoldOut: true,
     isFeatured: false,
     isPublished: true,
     venue: {
@@ -700,6 +710,7 @@ const additionalEvents = [
         name: "Platinum Table",
         price: 100000,
         description: "Table for 8 guests with premium seating, full dinner service, and VIP reception",
+        available: true,
       },
       {
         id: 19,
