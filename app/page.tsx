@@ -78,7 +78,7 @@ export default async function Home() {
               </TabsList>
             </div>
             <TabsContent value="upcoming" className="mt-8">
-              <ShowsList showImages={showImages} />
+              <ShowsList />
             </TabsContent>
             <TabsContent value="social" className="mt-8">
               <SocialFeed socialImages={socialImages} />

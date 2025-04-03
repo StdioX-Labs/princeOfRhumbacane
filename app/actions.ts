@@ -266,8 +266,41 @@ function getFallbackHeroImages(): { src: string; alt: string }[] {
   ]
 }
 
+// Update the getShowImages function to load real images
 export async function getShowImages(): Promise<string[]> {
-  // Simulate fetching show images
+  try {
+    const showsDir = path.join(process.cwd(), "public", "images", "shows")
+
+    // Check if directory exists
+    if (!fs.existsSync(showsDir)) {
+      console.log("Shows directory does not exist, creating it...")
+      fs.mkdirSync(showsDir, { recursive: true })
+      return getFallbackShowImages() // Return fallback images if directory was just created
+    }
+
+    // Read all files in the directory
+    const files = fs.readdirSync(showsDir)
+
+    // Filter for image files only
+    const imageFiles = files.filter((file) => {
+      const ext = path.extname(file).toLowerCase()
+      return [".jpg", ".jpeg", ".png", ".webp", ".gif"].includes(ext)
+    })
+
+    if (imageFiles.length === 0) {
+      return getFallbackShowImages() // Return fallback images if no images found
+    }
+
+    // Return the paths to the images
+    return imageFiles.map((file) => `/images/shows/${file}`)
+  } catch (error) {
+    console.error("Error reading shows directory:", error)
+    return getFallbackShowImages() // Return fallback images on error
+  }
+}
+
+// Add this function to provide fallback show images
+function getFallbackShowImages(): string[] {
   return [
     "/placeholder.svg?height=400&width=600&text=Summer+Solstice+Festival",
     "/placeholder.svg?height=400&width=600&text=Moonlight+Sonata",
