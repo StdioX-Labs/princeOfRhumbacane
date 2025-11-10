@@ -209,18 +209,6 @@ export function HeroSection({
                 <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#708238]" />
               </motion.div>
 
-              {/* Subtitle with refined typography */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1.2, ease: "easeOut" }}
-                className="space-y-3"
-              >
-                <p className="text-sm font-light tracking-[0.4em] text-[#9DC183] uppercase md:text-base">
-                  Prince Of Rhumbacane
-                </p>
-
-              </motion.div>
 
               {/* CTA Button with enhanced design */}
               <motion.div

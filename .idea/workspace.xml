@@ -5,89 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="58eac3ad-8564-4296-b719-e205e656b0eb" name="Changes" comment="ui improvements">
-      <change afterPath="$PROJECT_DIR$/.gitattributes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/checkout/track/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/audio-player.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_5663.JPEG.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_5664.JPEG.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6305.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6310.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6314.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6317.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6323.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6328.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6334.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6336.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6337.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6340.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6347.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6350.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6353.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6360.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6365.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6366.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6367.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6368.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6369.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6370.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6372.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6374.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6375.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6376.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6379.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6380.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6382.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6401.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6403.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6406.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/IMG_6498.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/music/baada ya kazi.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/music/mazoea.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/music/sema.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/music/something.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/yaba/wape.PNG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/checkout/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/checkout/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/contact/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/contact/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.netlifyignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/netlify.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/about-section.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/about-section.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/enquiry-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/enquiry-form.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/hero-section.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/hero-section.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/site-footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/site-footer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/site-header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/site-header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.mjs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/carousel/BreakfastClub.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/carousel/BreakfastClub.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/carousel/KenyaCane.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/carousel/KenyaCane.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/carousel/Solfest2024.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/carousel/Solfest2024.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/carousel/Zitakazopendwa.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/carousel/Zitakazopendwa.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/gallery/live_BirthdayLaunch.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/gallery/live_BirthdayLaunch.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/gallery/live_BlanketsAndWine.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/gallery/live_BlanketsAndWine.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/gallery/live_ChrismasRhumbaFest.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/gallery/live_ChrismasRhumbaFest.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/gallery/live_Solfest2024.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/gallery/live_Solfest2024.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/gallery/press_InMyElement.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/gallery/press_InMyElement.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/gallery/press_PrinceOfRhumbacane.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/gallery/press_PrinceOfRhumbacane.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/gallery/press_WhatsMyName.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/gallery/press_WhatsMyName.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/gallery/press_Yaba.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/gallery/press_Yaba.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/gallery/sherehe_Alchemist.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/gallery/sherehe_Alchemist.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/gallery/sherehe_BoutrousLive.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/gallery/sherehe_BoutrousLive.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/gallery/sherehe_ManLikeYaba.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/gallery/sherehe_ManLikeYaba.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/gallery/sherehe_Rhumbacane.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/gallery/sherehe_Rhumbacane.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/hero/yaba_image_109.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/hero/yaba_image_109.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/hero/yaba_image_13.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/hero/yaba_image_13.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/hero/yaba_image_37.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/hero/yaba_image_37.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/logo/yaba_logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/logo/yaba_logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/shows/artist/1.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/shows/artist/1.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/shows/artist/2.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/shows/artist/2.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/shows/artist/3.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/shows/artist/3.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/shows/artist/4.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/shows/artist/4.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/shows/event/1.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/shows/event/1.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/shows/event/2.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/shows/event/2.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/shows/event/3.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/shows/event/3.JPG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/placeholder-logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/placeholder-logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/placeholder-user.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/placeholder-user.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/placeholder.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/placeholder.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/yaba/music/baada ya kazi.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/yaba/music/mazoea.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/yaba/music/sema.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/yaba/music/something.wav" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,28 +45,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
-    "js.debugger.nextJs.config.created.client": "true",
-    "js.debugger.nextJs.config.created.server": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "C:/Users/BRIAN/Desktop/STDIOX Labs/CODE/princeOfRhumbacane/public/images/yaba/music",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "pnpm",
-    "to.speed.mode.migration.done": "true",
-    "ts.external.directory.path": "C:\\Users\\BRIAN\\Desktop\\STDIOX Labs\\CODE\\princeOfRhumbacane\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
+    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/BRIAN/Desktop/STDIOX Labs/CODE/princeOfRhumbacane/public/images/yaba/music&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\BRIAN\\Desktop\\STDIOX Labs\\CODE\\princeOfRhumbacane\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -187,7 +115,8 @@
       <updated>1762600279744</updated>
       <workItem from="1762600281056" duration="1868000" />
       <workItem from="1762782663317" duration="380000" />
-      <workItem from="1762783075195" duration="8613000" />
+      <workItem from="1762783075195" duration="8918000" />
+      <workItem from="1762792832135" duration="1038000" />
     </task>
     <servers />
   </component>
