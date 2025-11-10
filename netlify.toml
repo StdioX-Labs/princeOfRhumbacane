@@ -12,15 +12,6 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-  [plugins.inputs]
-    # Exclude large files from being traced into the function bundle
-    excludeFromTracing = [
-      "public/images/**/*.wav",
-      "public/images/**/*.mp4",
-      "public/images/**/*.mov",
-      "public/images/**/*.avi",
-      "public/images/**/*.flac"
-    ]
 
 [functions]
   # Use esbuild for faster, smaller bundles
