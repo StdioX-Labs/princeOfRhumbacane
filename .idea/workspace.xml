@@ -7,15 +7,11 @@
     <list default="true" id="58eac3ad-8564-4296-b719-e205e656b0eb" name="Changes" comment="ui improvements">
       <change afterPath="$PROJECT_DIR$/.netlifyignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/netlify.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/.gitattributes" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/hero-section.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/hero-section.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/site-footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/site-footer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/yaba/music/baada ya kazi.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/yaba/music/mazoea.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/yaba/music/sema.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/yaba/music/something.wav" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +112,7 @@
       <workItem from="1762600281056" duration="1868000" />
       <workItem from="1762782663317" duration="380000" />
       <workItem from="1762783075195" duration="8918000" />
-      <workItem from="1762792832135" duration="1038000" />
+      <workItem from="1762792832135" duration="1457000" />
     </task>
     <servers />
   </component>

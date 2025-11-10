@@ -24,6 +24,46 @@ const nextConfig = {
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
   },
+  // Exclude large media files from server build traces
+  outputFileTracingExcludes: {
+    '*': [
+      'public/images/**/*.wav',
+      'public/images/**/*.mp4',
+      'public/images/**/*.mov',
+      'public/images/**/*.avi',
+      'public/images/**/*.flac',
+    ],
+  },
+  // Ensure static files are properly handled
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+      }
+    }
+
+    // Add rule to handle large media files as external resources
+    config.module.rules.push({
+      test: /\.(wav|mp3|flac|mp4|mov|avi)$/,
+      type: 'asset/resource',
+      generator: {
+        filename: 'static/media/[name].[hash][ext]',
+      },
+    })
+
+    // Ignore large files in server bundle
+    if (isServer) {
+      config.externals = config.externals || []
+      config.externals.push({
+        '*.wav': 'commonjs *.wav',
+        '*.mp4': 'commonjs *.mp4',
+        '*.mov': 'commonjs *.mov',
+      })
+    }
+
+    return config
+  },
 }
 
 if (userConfig) {

@@ -1,0 +1,7 @@
+# Ignore large media files from being bundled into functions
+public/images/**/*.wav
+public/images/**/*.mp4
+public/images/**/*.mov
+public/images/**/*.avi
+public/images/**/*.flac
+

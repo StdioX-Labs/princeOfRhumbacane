@@ -6,13 +6,27 @@
 [build.environment]
   GIT_LFS_ENABLED = "true"
   NODE_VERSION = "18"
+  # Increase Node.js memory limit for build
+  NODE_OPTIONS = "--max-old-space-size=4096"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
+  [plugins.inputs]
+    # Exclude large files from being traced into the function bundle
+    excludeFromTracing = [
+      "public/images/**/*.wav",
+      "public/images/**/*.mp4",
+      "public/images/**/*.mov",
+      "public/images/**/*.avi",
+      "public/images/**/*.flac"
+    ]
+
 [functions]
-  # Increase function size limit to 50MB
+  # Use esbuild for faster, smaller bundles
   node_bundler = "esbuild"
+  # Explicitly set directory
+  directory = ".netlify/functions/"
 
 
 # Ignore large media files during build
@@ -32,4 +46,12 @@
 
 [build.processing.images]
   compress = true
+
+# Serve media files as static assets
+[[redirects]]
+  from = "/images/*"
+  to = "/images/:splat"
+  status = 200
+  force = false
+  conditions = {Role = ["public"]}
 
