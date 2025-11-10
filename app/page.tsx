@@ -1,142 +1,130 @@
 import Link from "next/link"
-import { ArrowRight, Calendar, Mail, Mic } from "lucide-react"
-
+import Image from "next/image"
+import { ShoppingCart } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { EnquiryForm } from "@/components/enquiry-form"
-import { SocialFeed } from "@/components/social-feed"
-import { ShowsList } from "@/components/shows-list"
+import { Card, CardContent } from "@/components/ui/card"
 import { HeroSection } from "@/components/hero-section"
-import { GallerySection } from "@/components/gallery-section"
-import { VisualTimeline } from "@/components/visual-timeline"
-import { Testimonials } from "@/components/testimonials"
-import { PhotoCarousel } from "@/components/photo-carousel"
 import { AboutSection } from "@/components/about-section"
-import { MerchandiseStore } from "@/components/merchandise-store"
-import { SocialMediaBanner } from "@/components/social-media-banner"
+import { AudioPlayer } from "@/components/audio-player"
 
 // Import server actions
 import {
-  getGalleryImages,
-  getCarouselImages,
-  getShowImages,
-  getTimelineImages,
   getAboutImages,
-  getSocialImages,
-  getTestimonialImages,
-  getMerchandiseImages,
   getHeroImages,
-  getLogoImage, // Add this import
+  getLogoImage,
 } from "./actions"
 
-// Update the Home component to fetch the logo
 export default async function Home() {
-  // Fetch all images
-  const galleryImages = (await getGalleryImages()) || []
-  const carouselImages = (await getCarouselImages()) || []
-  const showImages = (await getShowImages()) || []
-  const timelineImages = (await getTimelineImages()) || []
   const aboutImages = (await getAboutImages()) || []
-  const socialImages = (await getSocialImages()) || []
-  const testimonialImages = (await getTestimonialImages()) || []
-  const merchandiseImages = (await getMerchandiseImages()) || []
   const heroImages = (await getHeroImages()) || []
-  const logoSrc = await getLogoImage() // Add this line
+  const logoSrc = await getLogoImage()
+
+  // Define the Wape Wape EP tracks
+  const wapeWapeTracks = [
+    { number: 1, title: "Baada Ya Kazi", audio: "/images/yaba/music/baada ya kazi.wav" },
+    { number: 2, title: "Something", audio: "/images/yaba/music/something.wav" },
+    { number: 3, title: "Sema", audio: "/images/yaba/music/sema.wav" },
+    { number: 4, title: "Wape Wape", audio: null },
+    { number: 5, title: "Adhiambo", audio: null },
+    { number: 6, title: "Mazoea", audio: "/images/yaba/music/mazoea.wav" },
+  ]
 
   return (
     <>
-      <HeroSection images={heroImages} logoSrc={logoSrc} /> {/* Pass the logo */}
-      {/* Rest of your components remain the same */}
-      <section id="shows" className="container py-12 md:py-24 lg:py-32">
-        <div className="mx-auto flex max-w-[980px] flex-col items-center gap-4 text-center">
-          <h2 className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl lg:leading-[1.1]">
-            Experience the Art of Performance
-          </h2>
-          <div className="w-20 h-1 bg-primary rounded-full" />
-          <p className="max-w-[750px] text-lg text-muted-foreground sm:text-xl">
-            Immerse yourself in a world of artistic expression, where every performance tells a story and every moment
-            creates a memory.
-          </p>
-        </div>
-        <div className="mx-auto mt-16 max-w-5xl">
-          <Tabs defaultValue="upcoming" className="w-full">
-            <div className="flex items-center justify-center">
-              <TabsList className="grid w-full max-w-md grid-cols-3">
-                <TabsTrigger value="upcoming">
-                  <Calendar className="mr-2 h-4 w-4" />
-                  Shows
-                </TabsTrigger>
-                <TabsTrigger value="social">
-                  <Mic className="mr-2 h-4 w-4" />
-                  Updates
-                </TabsTrigger>
-                <TabsTrigger value="contact">
-                  <Mail className="mr-2 h-4 w-4" />
-                  Contact
-                </TabsTrigger>
-              </TabsList>
-            </div>
-            <TabsContent value="upcoming" className="mt-8">
-              <ShowsList />
-            </TabsContent>
-            <TabsContent value="social" className="mt-8">
-              <SocialFeed socialImages={socialImages} />
-            </TabsContent>
-            <TabsContent value="contact" className="mt-8" id="contact">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-2xl">Get in Touch</CardTitle>
-                  <CardDescription>
-                    Fill out the form below for bookings, collaborations, or any other inquiries.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <EnquiryForm />
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
-        </div>
-      </section>
-      {/* ... rest of your code ... */}
-      <PhotoCarousel
-        images={carouselImages}
-        title="Performance Highlights"
-        description="Capturing the essence of artistic expression through visual moments."
-      />
+      <HeroSection images={heroImages} logoSrc={logoSrc} />
+
       <AboutSection aboutImages={aboutImages} />
-      <section id="merchandise">
-        <MerchandiseStore merchandiseImages={merchandiseImages} />
-      </section>
-      <GallerySection images={galleryImages} />
-      <VisualTimeline timelineImages={timelineImages} />
-      {/* Add the new social media banner section here */}
-      <SocialMediaBanner />
-      <Testimonials testimonialImages={testimonialImages} />
-      <section className="bg-muted/50 py-12 md:py-24 lg:py-32">
-        <div className="container">
-          <div className="mx-auto flex max-w-[980px] flex-col items-center gap-4 text-center">
-            <h2 className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl">Join the Journey</h2>
-            <div className="w-20 h-1 bg-primary rounded-full" />
-            <p className="max-w-[750px] text-lg text-muted-foreground sm:text-xl">
-              Stay connected and be part of the artistic journey. Follow on social media for exclusive content and
-              updates.
-            </p>
-            <div className="mt-4 flex flex-wrap justify-center gap-4">
-              <Button asChild>
-                <Link href="/contact" className="gap-1">
-                  Book a Show
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </Button>
-              <Button variant="outline" asChild>
-                <Link href="#" className="gap-1">
-                  Join Newsletter
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </Button>
+
+      {/* Wape Wape EP Section */}
+      <section id="music" className="py-16 md:py-24 lg:py-32 bg-[#1A2421] relative overflow-hidden">
+        {/* Subtle background accents */}
+        <div className="absolute top-1/4 right-0 w-96 h-96 bg-[#708238]/5 blur-[120px] rounded-full" />
+        <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-[#9DC183]/5 blur-[120px] rounded-full" />
+
+        <div className="container px-4 md:px-6 relative z-10">
+          <div className="mx-auto max-w-4xl">
+            <div className="text-center mb-12 space-y-4">
+              <h2 className="text-3xl font-bold tracking-tighter md:text-4xl lg:text-5xl text-[#F0FFF0]">Wape Wape</h2>
+              <div className="w-20 h-1 bg-gradient-to-r from-transparent via-[#9DC183] to-transparent rounded-full mx-auto" />
+              <p className="text-lg text-[#9DC183]">
+                A 6-track EP exploring rhythms, emotions, and stories through sound
+              </p>
             </div>
+
+            <Card className="overflow-hidden bg-[#1A2421] border-[#708238]/30 shadow-2xl shadow-[#708238]/10">
+              <CardContent className="p-0">
+                <div className="grid md:grid-cols-2 gap-0">
+                  {/* Album Art */}
+                  <div className="bg-[#708238]/10 aspect-square flex items-center justify-center relative overflow-hidden border-r border-[#708238]/20">
+                    <Image
+                      src="/images/yaba/wape.PNG"
+                      alt="Wape Wape EP Cover"
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                    {/* Elegant overlay gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1A2421]/60 via-transparent to-transparent" />
+                  </div>
+
+                  {/* Track List */}
+                  <div className="p-6 space-y-3 bg-[#1A2421]">
+                    {wapeWapeTracks.map((track) => (
+                      <div
+                        key={track.number}
+                        className="rounded-lg border border-[#708238]/20 bg-[#708238]/5 p-4 transition-all duration-300 hover:bg-[#708238]/10 hover:border-[#9DC183]/30"
+                      >
+                        <div className="flex items-center gap-3 mb-2">
+                          <span className="text-sm font-medium text-[#9DC183] min-w-[24px]">
+                            {track.number}.
+                          </span>
+                          <span className="flex-1 font-medium text-[#F0FFF0]">{track.title}</span>
+                          {!track.audio && (
+                            <span className="text-xs text-[#9DC183]/60 italic">Preview unavailable</span>
+                          )}
+                        </div>
+                        {track.audio && (
+                          <div className="ml-9">
+                            <AudioPlayer
+                              src={track.audio}
+                              trackTitle={track.title}
+                              trackNumber={track.number}
+                            />
+                          </div>
+                        )}
+                      </div>
+                    ))}
+
+                    <div className="pt-4 space-y-3">
+                      <Button asChild className="w-full bg-[#708238] hover:bg-[#9DC183] text-[#F0FFF0] border-none shadow-lg shadow-[#708238]/30 hover:shadow-[#9DC183]/40 transition-all duration-300" size="lg">
+                        <Link href="/checkout" className="gap-2">
+                          <ShoppingCart className="h-5 w-5" />
+                          Purchase EP - KES 1,000
+                        </Link>
+                      </Button>
+                      <p className="text-xs text-center text-[#9DC183]/70">
+                        High quality digital download • All tracks included
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Simple Contact CTA */}
+      <section className="py-16 md:py-24 bg-gradient-to-b from-[#1A2421] to-[#1A2421]/95 border-t border-[#708238]/20">
+        <div className="container px-4 md:px-6">
+          <div className="mx-auto max-w-2xl text-center space-y-6">
+            <h2 className="text-2xl font-bold tracking-tighter md:text-3xl text-[#F0FFF0]">Get in Touch</h2>
+            <p className="text-[#9DC183]">
+              For bookings, collaborations, or inquiries
+            </p>
+            <Button asChild size="lg" className="bg-[#708238] hover:bg-[#9DC183] text-[#F0FFF0] border-none shadow-lg shadow-[#708238]/30 hover:shadow-[#9DC183]/40 transition-all duration-300">
+              <Link href="/contact">Contact</Link>
+            </Button>
           </div>
         </div>
       </section>

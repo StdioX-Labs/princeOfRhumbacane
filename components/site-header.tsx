@@ -5,41 +5,18 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import { Menu, X, ShoppingBag } from "lucide-react"
+import { Menu, X } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Badge } from "@/components/ui/badge"
-import { useCart } from "@/context/cart-context"
-
-// Client-side only cart button component
-function ClientSideCartButton() {
-  const { cartCount, toggleCart } = useCart()
-
-  return (
-    <Button variant="outline" size="icon" className="relative" onClick={toggleCart} aria-label="Shopping cart">
-      <ShoppingBag className="h-5 w-5" />
-      {cartCount > 0 && (
-        <Badge className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full p-0">
-          {cartCount}
-        </Badge>
-      )}
-    </Button>
-  )
-}
 
 export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState("")
-  const [isMounted, setIsMounted] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
 
-  // Only access the cart context after component has mounted
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
 
   useEffect(() => {
     // Handle scroll events
@@ -47,7 +24,7 @@ export function SiteHeader() {
       setScrolled(window.scrollY > 10)
 
       // Find the active section based on scroll position
-      const sections = ["shows", "gallery", "merchandise", "about"]
+      const sections = ["about", "music"]
       let currentSection = ""
 
       for (const section of sections) {
@@ -131,147 +108,140 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full border-b backdrop-blur supports-[backdrop-filter]:bg-background/60 ${
-        scrolled ? "shadow-sm" : ""
+      className={`fixed top-0 z-50 w-full transition-all duration-500 ${
+        scrolled 
+          ? "bg-[#1A2421]/95 backdrop-blur-md border-b border-[#708238]/20 shadow-2xl shadow-[#708238]/10" 
+          : "bg-transparent border-b border-white/5"
       }`}
     >
-      <div className="container flex h-16 items-center justify-between">
-        <button onClick={navigateHome} className="flex items-center space-x-2 focus:outline-none">
-          <span className="font-serif text-2xl font-bold tracking-tight">YABA</span>
+      {/* Elegant decorative top line */}
+      <div className={`absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#9DC183]/50 to-transparent transition-opacity duration-500 ${
+        scrolled ? "opacity-100" : "opacity-0"
+      }`} />
+
+      <div className="container flex h-20 items-center justify-between">
+        {/* Artistic Logo */}
+        <button
+          onClick={navigateHome}
+          className="group flex items-center space-x-3 focus:outline-none relative"
+        >
+          <div className="absolute -inset-2 bg-[#708238]/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full" />
+          <span className="relative font-serif text-3xl font-bold tracking-tight text-[#F0FFF0] group-hover:text-[#9DC183] transition-colors duration-300">
+            YABA
+          </span>
+
         </button>
-        <nav className="hidden md:flex gap-6">
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-1">
           <button
             onClick={navigateHome}
-            className={`text-sm font-medium transition-colors hover:text-primary ${
-              pathname === "/" && !activeSection ? "text-primary" : ""
+            className={`relative px-4 py-2 text-sm font-light tracking-wider transition-all duration-300 group ${
+              pathname === "/" && !activeSection ? "text-[#9DC183]" : "text-[#F0FFF0]/70 hover:text-[#F0FFF0]"
             }`}
           >
-            Home
-          </button>
-          <button
-            onClick={() => scrollToSection("shows")}
-            className={`text-sm font-medium transition-colors hover:text-primary ${
-              activeSection === "shows" ? "text-primary" : ""
-            }`}
-          >
-            Shows
-          </button>
-          <button
-            onClick={() => scrollToSection("gallery")}
-            className={`text-sm font-medium transition-colors hover:text-primary ${
-              activeSection === "gallery" ? "text-primary" : ""
-            }`}
-          >
-            Gallery
-          </button>
-          <button
-            onClick={() => scrollToSection("merchandise")}
-            className={`text-sm font-medium transition-colors hover:text-primary ${
-              activeSection === "merchandise" ? "text-primary" : ""
-            }`}
-          >
-            Merchandise
+            <span className="relative z-10">Home</span>
+            <div className="absolute inset-0 bg-[#708238]/10 scale-0 group-hover:scale-100 transition-transform duration-300 rounded" />
+            <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] bg-[#9DC183] transition-all duration-300 ${
+              pathname === "/" && !activeSection ? "w-1/2" : "w-0 group-hover:w-1/2"
+            }`} />
           </button>
           <button
             onClick={() => scrollToSection("about")}
-            className={`text-sm font-medium transition-colors hover:text-primary ${
-              activeSection === "about" ? "text-primary" : ""
+            className={`relative px-4 py-2 text-sm font-light tracking-wider transition-all duration-300 group ${
+              activeSection === "about" ? "text-[#9DC183]" : "text-[#F0FFF0]/70 hover:text-[#F0FFF0]"
             }`}
           >
-            About
+            <span className="relative z-10">About</span>
+            <div className="absolute inset-0 bg-[#708238]/10 scale-0 group-hover:scale-100 transition-transform duration-300 rounded" />
+            <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] bg-[#9DC183] transition-all duration-300 ${
+              activeSection === "about" ? "w-1/2" : "w-0 group-hover:w-1/2"
+            }`} />
+          </button>
+          <button
+            onClick={() => scrollToSection("music")}
+            className={`relative px-4 py-2 text-sm font-light tracking-wider transition-all duration-300 group ${
+              activeSection === "music" ? "text-[#9DC183]" : "text-[#F0FFF0]/70 hover:text-[#F0FFF0]"
+            }`}
+          >
+            <span className="relative z-10">Music</span>
+            <div className="absolute inset-0 bg-[#708238]/10 scale-0 group-hover:scale-100 transition-transform duration-300 rounded" />
+            <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] bg-[#9DC183] transition-all duration-300 ${
+              activeSection === "music" ? "w-1/2" : "w-0 group-hover:w-1/2"
+            }`} />
           </button>
           <Link
             href="/contact"
-            className={`text-sm font-medium transition-colors hover:text-primary ${
-              pathname === "/contact" ? "text-primary" : ""
+            className={`relative px-4 py-2 text-sm font-light tracking-wider transition-all duration-300 group ${
+              pathname === "/contact" ? "text-[#9DC183]" : "text-[#F0FFF0]/70 hover:text-[#F0FFF0]"
             }`}
           >
-            Contact
+            <span className="relative z-10">Contact</span>
+            <div className="absolute inset-0 bg-[#708238]/10 scale-0 group-hover:scale-100 transition-transform duration-300 rounded" />
+            <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] bg-[#9DC183] transition-all duration-300 ${
+              pathname === "/contact" ? "w-1/2" : "w-0 group-hover:w-1/2"
+            }`} />
           </Link>
-        </nav>
-        <div className="hidden md:flex items-center gap-3">
-          {isMounted ? (
-            <ClientSideCartButton />
-          ) : (
-            <Button variant="outline" size="icon" className="relative" aria-label="Shopping cart">
-              <ShoppingBag className="h-5 w-5" />
-            </Button>
-          )}
-          <Button asChild variant="ghost">
-            <Link href="/contact">Book Now</Link>
+
+          {/* Decorative separator */}
+          <div className="h-6 w-[1px] bg-[#708238]/30 mx-2" />
+
+          {/* CTA Button */}
+          <Button
+            asChild
+            className="ml-2 bg-[#708238] hover:bg-[#9DC183] text-[#F0FFF0] border-none shadow-lg shadow-[#708238]/30 hover:shadow-[#9DC183]/40 transition-all duration-300 rounded-full px-6"
+          >
+            <Link href="/contact">Get in Touch</Link>
           </Button>
-        </div>
+        </nav>
         <div className="flex items-center gap-3 md:hidden">
-          {isMounted ? (
-            <ClientSideCartButton />
-          ) : (
-            <Button variant="outline" size="icon" className="relative" aria-label="Shopping cart">
-              <ShoppingBag className="h-5 w-5" />
-            </Button>
-          )}
           <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
             <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon" aria-label="Menu">
+              <Button variant="ghost" size="icon" aria-label="Menu" className="text-[#F0FFF0] hover:text-[#9DC183] hover:bg-[#708238]/10">
                 {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+            <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-[#1A2421] border-l border-[#708238]/30">
               <nav className="flex flex-col gap-4 mt-8">
                 <button
                   onClick={(e) => {
                     navigateHome(e)
                     setIsMenuOpen(false)
                   }}
-                  className={`text-lg font-medium transition-colors hover:text-primary text-left ${
-                    pathname === "/" && !activeSection ? "text-primary" : ""
+                  className={`text-lg font-light tracking-wider transition-colors hover:text-[#9DC183] text-left py-3 px-4 rounded ${
+                    pathname === "/" && !activeSection ? "text-[#9DC183] bg-[#708238]/10" : "text-[#F0FFF0]"
                   }`}
                 >
                   Home
                 </button>
                 <button
-                  onClick={() => scrollToSection("shows")}
-                  className={`text-lg font-medium transition-colors hover:text-primary text-left ${
-                    activeSection === "shows" ? "text-primary" : ""
-                  }`}
-                >
-                  Shows
-                </button>
-                <button
-                  onClick={() => scrollToSection("gallery")}
-                  className={`text-lg font-medium transition-colors hover:text-primary text-left ${
-                    activeSection === "gallery" ? "text-primary" : ""
-                  }`}
-                >
-                  Gallery
-                </button>
-                <button
-                  onClick={() => scrollToSection("merchandise")}
-                  className={`text-lg font-medium transition-colors hover:text-primary text-left ${
-                    activeSection === "merchandise" ? "text-primary" : ""
-                  }`}
-                >
-                  Merchandise
-                </button>
-                <button
                   onClick={() => scrollToSection("about")}
-                  className={`text-lg font-medium transition-colors hover:text-primary text-left ${
-                    activeSection === "about" ? "text-primary" : ""
+                  className={`text-lg font-light tracking-wider transition-colors hover:text-[#9DC183] text-left py-3 px-4 rounded ${
+                    activeSection === "about" ? "text-[#9DC183] bg-[#708238]/10" : "text-[#F0FFF0]"
                   }`}
                 >
                   About
                 </button>
+                <button
+                  onClick={() => scrollToSection("music")}
+                  className={`text-lg font-light tracking-wider transition-colors hover:text-[#9DC183] text-left py-3 px-4 rounded ${
+                    activeSection === "music" ? "text-[#9DC183] bg-[#708238]/10" : "text-[#F0FFF0]"
+                  }`}
+                >
+                  Music
+                </button>
                 <Link
                   href="/contact"
-                  className={`text-lg font-medium transition-colors hover:text-primary ${
-                    pathname === "/contact" ? "text-primary" : ""
+                  className={`text-lg font-light tracking-wider transition-colors hover:text-[#9DC183] py-3 px-4 rounded ${
+                    pathname === "/contact" ? "text-[#9DC183] bg-[#708238]/10" : "text-[#F0FFF0]"
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Contact
                 </Link>
-                <Button asChild className="mt-4">
+                <Button asChild className="mt-4 bg-[#708238] hover:bg-[#9DC183] text-[#F0FFF0] border-none shadow-lg">
                   <Link href="/contact" onClick={() => setIsMenuOpen(false)}>
-                    Book Now
+                    Get in Touch
                   </Link>
                 </Button>
               </nav>

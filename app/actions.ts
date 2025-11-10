@@ -193,60 +193,40 @@ function getFallbackCarouselImages(): CarouselImage[] {
 
 export async function getHeroImages(): Promise<{ src: string; alt: string }[]> {
   try {
-    const heroDir = path.join(process.cwd(), "public", "images", "hero")
+    const yabaDir = path.join(process.cwd(), "public", "images", "yaba")
 
     // Check if directory exists
-    if (!fs.existsSync(heroDir)) {
-      console.log("Hero directory does not exist, creating it...")
-      fs.mkdirSync(heroDir, { recursive: true })
-      return getFallbackHeroImages() // Return fallback images if directory was just created
+    if (!fs.existsSync(yabaDir)) {
+      console.log("Yaba directory does not exist")
+      return getFallbackHeroImages()
     }
 
     // Read all files in the directory
-    const files = fs.readdirSync(heroDir)
+    const files = fs.readdirSync(yabaDir)
 
-    // Filter for image files only
+    // Filter for image files only (excluding wape.PNG)
     const imageFiles = files.filter((file) => {
       const ext = path.extname(file).toLowerCase()
-      return [".jpg", ".jpeg", ".png", ".webp", ".gif"].includes(ext)
+      return [".jpg", ".jpeg", ".png", ".webp", ".gif"].includes(ext) && file !== "wape.PNG"
     })
 
     if (imageFiles.length === 0) {
-      return getFallbackHeroImages() // Return fallback images if no images found
+      return getFallbackHeroImages()
     }
 
     // Process each image file
-    return imageFiles.map((file, index) => {
-      // Get filename without extension
-      const nameWithoutExt = path.basename(file, path.extname(file))
-
-      // Format the filename for display
-      // Replace hyphens and underscores with spaces
-      let caption = nameWithoutExt.replace(/[-_]/g, " ")
-
-      // Add spaces between camelCase words
-      caption = caption.replace(/([a-z])([A-Z])/g, "$1 $2")
-
-      // Add spaces between numbers and letters
-      caption = caption.replace(/([a-zA-Z])(\d)/g, "$1 $2").replace(/(\d)([a-zA-Z])/g, "$1 $2")
-
-      // Capitalize each word
-      caption = caption
-        .split(" ")
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-        .join(" ")
-        .trim()
-
+    return imageFiles.slice(0, 5).map((file, index) => {
       return {
-        src: `/images/hero/${file}`,
-        alt: caption,
+        src: `/images/yaba/${file}`,
+        alt: `YABA - Prince of Rhumbacane ${index + 1}`,
       }
     })
   } catch (error) {
-    console.error("Error reading hero directory:", error)
-    return getFallbackHeroImages() // Return fallback images on error
+    console.error("Error reading yaba directory:", error)
+    return getFallbackHeroImages()
   }
 }
+
 
 // Add this function to your existing actions.ts file
 function getFallbackHeroImages(): { src: string; alt: string }[] {
@@ -322,13 +302,34 @@ export async function getTimelineImages(): Promise<string[]> {
 }
 
 export async function getAboutImages(): Promise<string[]> {
-  // Simulate fetching about section images
-  return [
-    "/placeholder.svg?height=600&width=400&text=Portrait_YABA",
-    "/placeholder.svg?height=400&width=400&text=Studio_Recording",
-    "/placeholder.svg?height=400&width=400&text=Performance_Live",
-    "/placeholder.svg?height=600&width=400&text=Stage_Concert",
-  ]
+  try {
+    const yabaDir = path.join(process.cwd(), "public", "images", "yaba")
+
+    // Check if directory exists
+    if (!fs.existsSync(yabaDir)) {
+      console.log("Yaba directory does not exist")
+      return []
+    }
+
+    // Read all files in the directory
+    const files = fs.readdirSync(yabaDir)
+
+    // Filter for image files only (excluding wape.PNG)
+    const imageFiles = files.filter((file) => {
+      const ext = path.extname(file).toLowerCase()
+      return [".jpg", ".jpeg", ".png", ".webp", ".gif"].includes(ext) && file !== "wape.PNG"
+    })
+
+    if (imageFiles.length === 0) {
+      return []
+    }
+
+    // Return all image paths
+    return imageFiles.map((file) => `/images/yaba/${file}`)
+  } catch (error) {
+    console.error("Error reading yaba directory:", error)
+    return []
+  }
 }
 
 export async function getSocialImages(): Promise<string[]> {

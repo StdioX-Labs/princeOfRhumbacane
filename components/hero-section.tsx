@@ -96,13 +96,13 @@ export function HeroSection({
 
   if (!mounted) {
     return (
-      <section className="relative h-screen w-full overflow-hidden bg-black">
+      <section className="relative h-screen w-full overflow-hidden bg-[#1A2421]">
         <div className="absolute inset-0 z-10 flex items-center justify-center">
           <div className="container">
-            <div className="mx-auto max-w-3xl text-center text-white">
+            <div className="mx-auto max-w-3xl text-center text-[#F0FFF0]">
               <div className="relative h-20 w-80 mx-auto">
                 {/* Placeholder for logo during SSR */}
-                <div className="w-full h-full bg-white/10 animate-pulse rounded-md"></div>
+                <div className="w-full h-full bg-[#708238]/20 animate-pulse rounded-md"></div>
               </div>
             </div>
           </div>
@@ -112,13 +112,13 @@ export function HeroSection({
   }
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-black">
-      {/* Artistic background with subtle movement on mouse position */}
-      <div ref={imageRef} className="absolute inset-0 z-0 transition-transform duration-[3s]">
+    <section className="relative h-screen w-full overflow-hidden bg-[#1A2421]">
+      {/* Professional background with parallax effect */}
+      <div ref={imageRef} className="absolute inset-0 z-0 transition-transform duration-[3s] ease-out">
         {heroImages.map((image, index) => (
           <div
             key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ${
+            className={`absolute inset-0 transition-opacity duration-[1500ms] ${
               index === currentImageIndex ? "opacity-100" : "opacity-0"
             }`}
           >
@@ -128,89 +128,159 @@ export function HeroSection({
               fill
               quality={90}
               sizes="100vw"
-              className="object-cover opacity-60"
+              className="opacity-30 scale-110 object-cover"
+              style={{
+                objectPosition: 'center center'
+              }}
               priority={index === 0}
+              loading={index === 0 ? "eager" : "lazy"}
             />
           </div>
         ))}
 
-        {/* Simple gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+        {/* Sophisticated gradient overlays */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1A2421]/95 via-[#1A2421]/85 to-[#1A2421]/95" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1A2421] via-transparent to-[#1A2421]/60" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(112,130,56,0.08),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(157,193,131,0.06),transparent_50%)]" />
       </div>
 
-      {/* Artistic frame element */}
-      <div className="absolute inset-x-4 inset-y-4 border border-white/10 z-10 pointer-events-none md:inset-x-8 md:inset-y-8 lg:inset-x-16 lg:inset-y-16" />
+      {/* Sleek geometric accent lines */}
+      <div className="absolute inset-0 z-10 pointer-events-none">
+        {/* Horizontal lines */}
+        <div className="absolute top-[30%] left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#708238]/20 to-transparent" />
+        <div className="absolute top-[70%] left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#9DC183]/15 to-transparent" />
 
+        {/* Vertical accent lines */}
+        <div className="absolute left-[15%] top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-[#708238]/15 to-transparent" />
+        <div className="absolute right-[15%] top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-[#9DC183]/10 to-transparent" />
+      </div>
+
+      {/* Main content */}
       <div className="absolute inset-0 z-20 flex items-center justify-center">
         <div className="container px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1.5 }}
-            className="mx-auto max-w-4xl"
+            transition={{ duration: 1.2, ease: "easeOut" }}
+            className="mx-auto max-w-5xl"
           >
-            <div className="flex flex-col items-center text-center">
+            <div className="flex flex-col items-center text-center space-y-8">
+              {/* Logo with sophisticated animations */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 0.5 }}
-                className="overflow-hidden"
+                initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 1.2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                className="relative"
               >
-                {/* Logo image instead of SVG text */}
-                <div className="relative h-40 w-80 mx-auto sm:h-48 sm:w-96 md:h-56 md:w-[32rem]">
-                  <Image src={logo || "/placeholder.svg"} alt="YABA Logo" fill className="object-contain" priority />
+                <div className="relative h-32 w-72 mx-auto sm:h-40 sm:w-96 md:h-48 md:w-[28rem] lg:h-56 lg:w-[32rem]">
+                  {/* Elegant glow effect */}
+                  <motion.div
+                    className="absolute inset-0 bg-[#9DC183]/15 blur-[60px]"
+                    animate={{
+                      scale: [1, 1.1, 1],
+                      opacity: [0.15, 0.25, 0.15]
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
+                  <Image
+                    src={logo || "/placeholder.svg"}
+                    alt="YABA Logo"
+                    fill
+                    className="object-contain relative z-10 drop-shadow-[0_0_40px_rgba(157,193,131,0.25)]"
+                    priority
+                  />
                 </div>
               </motion.div>
 
+              {/* Elegant separator */}
               <motion.div
                 initial={{ opacity: 0, scaleX: 0 }}
                 animate={{ opacity: 1, scaleX: 1 }}
-                transition={{ duration: 1, delay: 1 }}
-                className="mt-6 h-[1px] w-24 bg-white/30"
-              />
-
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 1.5 }}
-                className="mt-6 text-lg font-light tracking-widest text-white/70 uppercase"
+                transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
+                className="flex items-center gap-4"
               >
-                Prince Of Rhumbacane
-              </motion.p>
+                <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#708238]" />
+                <div className="w-1.5 h-1.5 bg-[#9DC183] rotate-45" />
+                <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#708238]" />
+              </motion.div>
 
+              {/* Subtitle with refined typography */}
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 2 }}
-                className="mt-16"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1.2, ease: "easeOut" }}
+                className="space-y-3"
               >
-                <Button
+                <p className="text-sm font-light tracking-[0.4em] text-[#9DC183] uppercase md:text-base">
+                  Prince Of Rhumbacane
+                </p>
+
+              </motion.div>
+
+              {/* CTA Button with enhanced design */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1.6, ease: "easeOut" }}
+                className="pt-8"
+              >
+                <button
                   onClick={scrollToShows}
-                  variant="outline"
-                  className="border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white rounded-none px-8 py-6 text-sm tracking-widest uppercase"
+                  className="group relative overflow-hidden"
                 >
-                  Discover
-                </Button>
+                  {/* Button background effects */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#708238] to-[#708238] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-[#9DC183]/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 scale-150" />
+
+                  {/* Button border */}
+                  <div className="relative px-12 py-4 border border-[#708238] group-hover:border-[#9DC183] transition-colors duration-500">
+                    <span className="relative z-10 text-[#F0FFF0] text-xs tracking-[0.25em] uppercase font-light flex items-center gap-3">
+                      Explore My Work
+                      <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </span>
+                  </div>
+                </button>
               </motion.div>
             </div>
           </motion.div>
         </div>
       </div>
 
-      {/* Minimal scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.5 }}
-        transition={{ delay: 2.5, duration: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
-      >
+
+      {/* Ambient light particles effect */}
+      <div className="absolute inset-0 z-[5] pointer-events-none overflow-hidden">
         <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Number.POSITIVE_INFINITY, duration: 2, ease: "easeInOut" }}
-          className="h-12 w-[1px] bg-white/30 mx-auto"
+          className="absolute top-[20%] left-[10%] w-2 h-2 bg-[#9DC183]/30 rounded-full blur-sm"
+          animate={{
+            y: [0, -20, 0],
+            opacity: [0.3, 0.6, 0.3]
+          }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         />
-      </motion.div>
+        <motion.div
+          className="absolute top-[60%] right-[15%] w-1.5 h-1.5 bg-[#708238]/40 rounded-full blur-sm"
+          animate={{
+            y: [0, -15, 0],
+            opacity: [0.4, 0.7, 0.4]
+          }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        />
+        <motion.div
+          className="absolute top-[40%] right-[25%] w-1 h-1 bg-[#9DC183]/20 rounded-full blur-sm"
+          animate={{
+            y: [0, -10, 0],
+            opacity: [0.2, 0.5, 0.2]
+          }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        />
+      </div>
     </section>
   )
 }
-
